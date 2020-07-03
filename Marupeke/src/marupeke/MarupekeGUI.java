@@ -20,12 +20,12 @@ public class MarupekeGUI extends Application
 {    
     public static enum Difficulty {Easy, Medium, Hard }
     
-    protected static final int WINDOW_WIDTH = 800;
-    protected static final int WINDOW_HEIGHT = 600;
+    protected static final int WINDOW_WIDTH = 700;
+    protected static final int WINDOW_HEIGHT = 700;
     protected static final String WINDOW_TITLE = "Marupeke";
     protected static final boolean RESIZABLE = false;
-    protected static final String BACKGROUND_COLOUR = "#1b5e20";
-    protected static final int GRID_BUTTON_SIZE = 64;
+    protected static final String BACKGROUND_COLOUR = "#1b1b1b";
+    protected static final int GRID_BUTTON_SIZE = 48;
     protected static final int GRID_BUTTON_SPACING = 0;
     
     public static final Image RAW_IMAGE_X = new Image("file:assets/images/x.png");
