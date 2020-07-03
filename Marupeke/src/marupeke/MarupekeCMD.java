@@ -54,7 +54,7 @@ public class MarupekeCMD
                 System.out.print(game.toString());
             }
         }   
-        System.out.println("END");
+        System.out.println("Thanks for playing!");
     }
     
     private static String readInput(String prompt)

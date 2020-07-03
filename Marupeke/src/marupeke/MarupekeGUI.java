@@ -1,7 +1,6 @@
 package marupeke;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -18,8 +17,6 @@ import javafx.stage.Stage;
 
 public class MarupekeGUI extends Application
 {    
-    public static enum Difficulty {Easy, Medium, Hard }
-    
     protected static final int WINDOW_WIDTH = 700;
     protected static final int WINDOW_HEIGHT = 700;
     protected static final String WINDOW_TITLE = "Marupeke";
