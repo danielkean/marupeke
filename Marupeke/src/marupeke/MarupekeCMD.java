@@ -1,4 +1,5 @@
 package marupeke;
+import javax.xml.namespace.QName;
 import java.util.Scanner;
 
 public class MarupekeCMD
@@ -25,9 +26,28 @@ public class MarupekeCMD
                 }
                 case "new" ->
                 {
-                    int size = Integer.parseInt(readInput("Game Size: "));
-                    game = MarupekeGrid.randomPuzzle(size, 5, 3, 3);
+                    int size = Integer.parseInt(readInput("Game Size (6-10): "));
 
+                    if(size < 6 || size > 10)
+                    {
+                        System.out.println("That is not a valid game size");
+                        break;
+                    }
+
+                    String difficultyString = readInput("Game Difficulty (easy, medium, hard): ");
+                    Difficulty difficulty = null;
+
+                    try
+                    {
+                         difficulty = Difficulty.valueOf(difficultyString.substring(0,1).toUpperCase() + difficultyString.substring(1));
+                    }
+                    catch (IllegalArgumentException e)
+                    {
+                        System.out.println("That is not a valid difficulty");
+                        break;
+                    }
+
+                    game = MarupekeGrid.randomPuzzle(size, difficulty);
                     System.out.print(game.toString());
                 }
                 case "x" ->
@@ -37,7 +57,13 @@ public class MarupekeCMD
                     int[] coords = getUserCoordinates();
                     if(coords == null) break;
 
-                    game.setX(coords[0], coords[1], true);
+                    boolean canEdit = game.setX(coords[0], coords[1], true);
+
+                    if(canEdit == false)
+                    {
+                        System.out.println("This tile is not editable");
+                        break;
+                    }
 
                     System.out.print(game.toString());
                 }
@@ -48,7 +74,13 @@ public class MarupekeCMD
                     int[] coords = getUserCoordinates();
                     if(coords == null) break;
 
-                    game.setO(coords[0], coords[1], true);
+                    boolean canEdit = game.setO(coords[0], coords[1], true);
+
+                    if(canEdit == false)
+                    {
+                        System.out.println("This tile is not editable");
+                        break;
+                    }
 
                     System.out.print(game.toString());
                 }
@@ -59,7 +91,13 @@ public class MarupekeCMD
                     int[] coords = getUserCoordinates();
                     if(coords == null) break;
 
-                    game.unmark(coords[0], coords[1]);
+                    boolean canEdit = game.unmark(coords[0], coords[1]);
+
+                    if(canEdit == false)
+                    {
+                        System.out.println("This tile is not editable");
+                        break;
+                    }
 
                     System.out.print(game.toString());
                 }
@@ -87,8 +125,8 @@ public class MarupekeCMD
 
     private static int[] getUserCoordinates()
     {
-        int x = Integer.parseInt(readInput("Row Position: "));
-        int y = Integer.parseInt(readInput("Column Position: "));
+        int x = Integer.parseInt(readInput("Row Position " + "(0-" + (game.getGrid().length - 1) + "): "));
+        int y = Integer.parseInt(readInput("Column Position " + "(0-" + (game.getGrid().length - 1) + "): "));
 
         if(x < 0 || y < 0 || x > game.getGrid().length-1 || y > game.getGrid().length-1)
         {

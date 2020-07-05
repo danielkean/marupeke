@@ -2,12 +2,12 @@ package marupeke;
 
 public class Tile
 {
-    public boolean editable;
+    public boolean isEditable;
     public State state;
     
-    public Tile(boolean editable, State state)
+    public Tile(boolean isEditable, State state)
     {
-        this.editable = editable;
+        this.isEditable = isEditable;
         this.state = state;
     }
 }

@@ -12,9 +12,9 @@ public class TileGUI
     private final int x;
     private final int y;
     
-    public TileGUI(boolean editable, State state, int x, int y)
+    public TileGUI(boolean isEditable, State state, int x, int y)
     {
-        tile = new Tile(editable, state);
+        tile = new Tile(isEditable, state);
         button = buttonSetup();
         
         this.x = x;
@@ -43,12 +43,12 @@ public class TileGUI
             // Play a different sound depending on if the tile is editable
             if(MarupekeGUI.soundCheckBox.isSelected())
             {
-                String soundPath = (tile.editable) ? "file:assets/audio/click_1.mp3" : "file:assets/audio/click_2.mp3";
+                String soundPath = (tile.isEditable) ? "file:assets/audio/click_1.mp3" : "file:assets/audio/click_2.mp3";
                 AudioClip sound = new AudioClip(soundPath);
                 sound.play();
             }
 
-            if(tile.editable == false) return;
+            if(tile.isEditable == false) return;
             
             TileGUI tileGUI = cycleButtonState();
             newButton.setGraphic(tileGUI.button.getGraphic());

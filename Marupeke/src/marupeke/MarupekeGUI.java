@@ -106,18 +106,7 @@ public class MarupekeGUI extends Application
             return null;
         }
         
-        int fillSize = 0;
-        int xSize = 0;
-        int oSize = 0;
-
-        switch(difficultyDropdown.getValue())
-        {
-            case Easy   -> { fillSize = 8; xSize = 2; oSize = 2; }
-            case Medium -> { fillSize = 5; xSize = 4; oSize = 4; }
-            case Hard   -> { fillSize = 3; xSize = 5; oSize = 5; }
-        }
-        
-        marupekeGrid = MarupekeGrid.randomPuzzle(gameSizeNum, fillSize, xSize, oSize);
+        marupekeGrid = MarupekeGrid.randomPuzzle(gameSizeNum, difficultyDropdown.getValue());
         GridPane gamePane = gameToGrid();
         
         paneSetup(gamePane);
@@ -134,7 +123,7 @@ public class MarupekeGUI extends Application
         {
             for(int j = 0; j < marupekeGrid.getGrid()[0].length; j++)
             {
-                TileGUI tileGUI = new TileGUI(marupekeGrid.getGrid()[i][j].editable, marupekeGrid.getGrid()[i][j].state, i, j);
+                TileGUI tileGUI = new TileGUI(marupekeGrid.getGrid()[i][j].isEditable, marupekeGrid.getGrid()[i][j].state, i, j);
                 grid.add(tileGUI.button, j, i);         
             }
         }

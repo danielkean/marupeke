@@ -25,8 +25,19 @@ public class MarupekeGrid
         }
     }
     
-    public static MarupekeGrid randomPuzzle(int size, int numFill, int numX, int numO)
+    public static MarupekeGrid randomPuzzle(int size, Difficulty difficulty)
     {
+        int numFill = 0;
+        int numX = 0;
+        int numO = 0;
+
+        switch(difficulty)
+        {
+            case Easy ->    { numFill = 8; numX = 2; numO = 2; }
+            case Medium ->  { numFill = 5; numX = 4; numO = 4; }
+            case Hard ->    { numFill = 3; numX = 5; numO = 5; }
+        }
+
         int total = numFill + numX + numO;
         if(total > (size * size) / 2)
         {   
@@ -84,12 +95,12 @@ public class MarupekeGrid
     public boolean setSolid(int x, int y)
     {
         Tile tile = grid[x][y];
-        boolean wasEditable = (tile.editable == true);
+        boolean wasEditable = (tile.isEditable == true);
         
         if(wasEditable)
         {
             tile.state = State.SOLID;
-            tile.editable = false;
+            tile.isEditable = false;
         }
         
         return wasEditable;
@@ -98,12 +109,12 @@ public class MarupekeGrid
     public boolean setX(int x, int y, boolean canEdit)
     {
         Tile tile = grid[x][y];
-        boolean wasEditable = (tile.editable == true);
+        boolean wasEditable = (tile.isEditable == true);
         
         if(wasEditable)
         {
             tile.state = State.X;
-            tile.editable = canEdit;
+            tile.isEditable = canEdit;
         }
         
         return wasEditable;
@@ -112,12 +123,12 @@ public class MarupekeGrid
     public boolean setO(int x, int y, boolean canEdit)
     {
         Tile tile = grid[x][y];
-        boolean wasEditable = (tile.editable == true);
+        boolean wasEditable = (tile.isEditable == true);
         
         if(wasEditable)
         {
             tile.state = State.O;
-            tile.editable = canEdit;
+            tile.isEditable = canEdit;
         }
         
         return wasEditable;
@@ -127,7 +138,7 @@ public class MarupekeGrid
     {
         Tile tile = grid[x][y];
 
-        if(tile.editable)
+        if(tile.isEditable)
         {
             tile.state = State.BLANK;
             return true;
